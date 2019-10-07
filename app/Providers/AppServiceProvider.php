@@ -13,7 +13,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        /**
+         * Instead of adding the service provider in the config/app.php file,
+         * we allowed our application to load the Laravel IDE Helper on non-production env.
+         */
+        if ($this->app->environment() !== 'production') {
+            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+        }
     }
 
     /**
