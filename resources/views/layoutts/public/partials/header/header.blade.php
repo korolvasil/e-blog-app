@@ -25,8 +25,8 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
                         {{--END LOGOUT--}}
                     @else
-                        <li><a href="{{ route('login') }}"><span>Вхід</span></a></li>
-                        <li><a href="{{ route('register') }}"><span>Реєстрація</span></a></li>
+                        <li><a href="{{ route('login') }}"><span>Sign in</span></a></li>
+                        <li><a href="{{ route('register') }}"><span>Sign up</span></a></li>
                     @endauth
                 </ul>
             </nav>
