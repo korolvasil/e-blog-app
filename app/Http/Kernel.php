@@ -41,6 +41,15 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+
+        'web-api' =>[
+            'throttle:60,1',
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
+            'bindings',
+        ]
     ];
 
     /**

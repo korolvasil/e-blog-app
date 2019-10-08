@@ -46,6 +46,11 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'web-api' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ]
     ],
 
     /*
