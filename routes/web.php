@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +12,14 @@
 
 Auth::routes(['verify' => true]);
 
+/* Home */
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+})->name('home');
+
+/* Admin Panel */
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'role:admin'])->group( function (){
+    Route::get('{path?}', 'AdminController@panel')
+        ->where('path', '.*')
+        ->name('admin.panel');
 });
