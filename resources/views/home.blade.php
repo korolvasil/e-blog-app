@@ -1,37 +1,15 @@
 @extends('layouts.public.app')
 
 @section('content')
-    <p>Торгова марка C&amp;H (COOPER &amp; HUNTER) належить компанії COOPER AND HUNTER INTERNATIONAL CORPORATION
-        (USPTO / United States Patent &amp; Trademark / № 4494682)</p>
 
-    <p>Наслідуючи кращі традиції компаній - лідерів, у галузі виробництва кліматичного обладнання у США, у 2003 році
-        компанія Сooper&amp;Hunter
-        International Corporation почала виробництво широкого спектру кліматичного обладнання вже під власною ТМ.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dolores eum illum iure nemo nobis praesentium ratione rem, vero. Asperiores excepturi modi neque obcaecati recusandae!</p>
 
-    <p>Дві ідеології, два напрямки, два лідери об'єдналися, щоб створювати
-        новий продукт. Вишуканий дизайн, відповідний модному тренду, ергономіка та
-        комфорт об'єдналися з інноваційними розробками, сучасною технологією і високою
-        якістю.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet corporis culpa dicta distinctio fugiat illo ipsam
+        iste magnam, nesciunt nostrum, nulla, placeat quasi quos recusandae sequi sint velit veritatis. Est.</p>
 
-    <p>«COMFORT INNOVATIONS»
-        - ці слова стали слоганом бренду COOPER&amp;HUNTER.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad harum iure pariatur quae suscipit. Ab corporis deleniti earum, enim error et in ipsum, libero maxime nulla perspiciatis repudiandae sint voluptatum! Assumenda beatae laudantium mollitia numquam quae quis repellendus voluptate! Deleniti explicabo fugit pariatur quidem! Accusantium animi asperiores autem commodi dolore doloribus ea, eos est eveniet fuga, fugit hic id illo impedit iste libero magni maiores minima nobis nostrum nulla officia officiis pariatur perspiciatis provident reprehenderit saepe tenetur ullam, ut voluptatibus. Ad aliquid delectus explicabo nisi quasi tenetur totam. Quis rem sapiente suscipit velit voluptatem! Atque eos quisquam rem velit voluptatem.</p>
 
-    <p>COOPER&amp;HUNTER - це міжнародний кліматичний бренд. Географія
-        продажів охоплює велику кількість країн на різних континентах і постійно
-        розширюється, що є доказом заслуженою популярністю торгової марки.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam deserunt id libero mollitia nulla quos repudiandae sapiente sint veritatis voluptatem. Aliquid aspernatur corporis distinctio earum harum illo molestias, pariatur quaerat! Accusamus assumenda cumque ducimus ex fugit laborum non numquam quam. Ducimus minus modi odio omnis quae ratione soluta ut. Temporibus.</p>
 
-    <p>З більш ніж 20-річним досвідом роботи в галузі кондиціонування повітря та
-        вентиляції компанія Cooper&amp;Hunter стала провідним гравцем у сфері HVAC.
-        Продукція під брендом Cooper&amp;Hunter експортується в більш ніж 50 країн та
-        регіонів усього світу. З моменту свого залучення до зарубіжних ринків
-        Cooper&amp;Hunter перетворився на відому торгову марку, що швидко збільшує
-        обсяги експорту, щороку виходить на нові ринки.</p>
-
-    <p>У 2017 році компанія уклала остаточні угоди для довгострокового
-        стратегічного партнерства з компанією Zhuhai Vino Environmental Technology
-        Equipment Co. LTD та покупки акцій компанії, яка, прискорила зростання на
-        світовому ринку. Завод у Чжухаї отримав нове ім'я: Zhuhai Vino
-        - Cooper&amp;Hunter Environmental Technology Equipment Co. LTD.</p>
-
-    @include('layouts.partials.logo')
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, voluptatem.</p>
 @endsection
