@@ -1,0 +1,12 @@
+header .top-bar{
+  &, a {
+    color: #999; // TODO: add to variables
+  }
+  background-color: #f0f0f0; // TODO: add to variables
+  nav li{
+    border-right: 1px solid #dadada;
+  }
+  nav li:first-child{
+    border-left: 1px solid #dadada;
+  }
+}

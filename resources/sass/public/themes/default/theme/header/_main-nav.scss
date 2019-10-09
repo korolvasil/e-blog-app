@@ -1,0 +1,24 @@
+header .main-nav{
+  background: #1E69B8;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+  li{
+    &>a{
+      color: white;
+    }
+    &:hover, &.current:hover{
+      background: #1a5ca2;
+    }
+    &.current{
+      background: #397cc3;
+      &::after{
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #fff;
+      }
+    }
+  }
+}
