@@ -1,0 +1,19 @@
+header {
+  @extend .v-flex;
+  .header-container{
+    &>.inner{
+      @extend .container;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      .row{
+        align-items: center;
+        justify-content: space-between;
+        .header-brand, .header-nav{
+          @extend .col, .flex-center;
+          flex: 0;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
