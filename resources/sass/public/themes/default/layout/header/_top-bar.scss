@@ -1,0 +1,29 @@
+header .top-bar{
+  .inner{
+    @extend .container;
+    .row{
+      justify-content: space-between;
+      .col{
+        display: flex;
+        align-items: center;
+        &.left{
+          flex: 1;
+        }
+        &.right{
+          flex: 0;
+        }
+      }
+    }
+  }
+  font-size: 0.9rem; // TODO: add to fonts scss
+
+  li span {
+    padding: 0.8rem;
+  }
+  a{
+    padding: 0;
+  }
+  span{
+    white-space: nowrap;
+  }
+}

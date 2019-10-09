@@ -1,0 +1,11 @@
+header .main-nav{
+  &>.inner{
+    @extend .container;
+  }
+  li{
+    position: relative;
+    &>a{
+      padding: 1rem 1.2rem;
+    }
+  }
+}

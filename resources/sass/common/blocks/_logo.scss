@@ -1,0 +1,35 @@
+/* Site logo */
+.logo{
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  width: 36px;
+  height: 44px;
+
+  .inner{
+    @extend .flex-center;
+    position: relative;
+    left: -7px;
+    top: -3px;
+    width: 48px;
+    height: 48px;
+
+    .feather-shield{
+      //color: #1c63b8;
+      color: inherit;
+      stroke-width: 0.05rem;
+      height: 3rem;
+      width: 3rem;
+    }
+    .feather-play{
+      //color: #1c63b8;
+      color: inherit;
+      stroke-width: 0.1rem;
+      height: 1rem;
+      width: 1rem;
+      position: absolute;
+      left: 17px;
+      top:15px
+    }
+  }
+}
