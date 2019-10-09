@@ -1,0 +1,38 @@
+/* Typography */
+body{
+  color: #5c5b5b;
+  font-family: "PT Sans", sans-serif;
+  line-height: 1.35rem;
+  letter-spacing: 0.014rem;
+  font-size: 0.95rem;
+  p{
+    margin-bottom: 1.35rem;
+  }
+}
+
+/* Site Brand */
+header .brand{
+  .name, .name span{
+    font-family: 'Gruppo', sans-serif;
+    font-size: 2rem;
+    line-height: 1.8rem;
+    letter-spacing: 0.045rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .slogan, .slogan span{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+}
+
+/* Main Nav */
+header .main-nav{
+  li>a{
+    font-size: 0.95rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
