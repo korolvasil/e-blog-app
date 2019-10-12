@@ -62,6 +62,7 @@
     20 => 'App\\Providers\\EventServiceProvider',
     21 => 'App\\Providers\\RouteServiceProvider',
     22 => 'App\\Providers\\RepositoryServiceProvider',
+
   ),
   'deferred' => 
   array (
