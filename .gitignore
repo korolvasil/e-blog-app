@@ -1,10 +1,10 @@
 /node_modules
-/bootstrap/cache
 /public/css
 /public/mix-manifest.json
 /public/js
 /public/hot
 /public/storage
+/bootstrap/cache
 /storage/*.key
 /vendor
 .env
