@@ -1,4 +1,5 @@
 /node_modules
+/bootstrap/cache
 /public/css
 /public/mix-manifest.json
 /public/js
