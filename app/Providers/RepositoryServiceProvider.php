@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\PostRepository;
+use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Eloquent\EloquentPostRepository;
+use App\Repositories\Eloquent\EloquentUserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -16,6 +18,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(PostRepository::class, EloquentPostRepository::class);
+        $this->app->bind(UserRepository::class, EloquentUserRepository::class);
     }
 
     /**
