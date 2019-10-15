@@ -4,8 +4,9 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Post;
 use App\Repositories\Contracts\PostRepository;
+use App\Repositories\RepositoryAbstract;
 
-class EloquentPostRepository implements PostRepository
+class EloquentPostRepository extends RepositoryAbstract implements PostRepository
 {
 
     public function all()
