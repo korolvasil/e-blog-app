@@ -19,7 +19,22 @@ class PostController extends Controller
      */
     public function index(PostRepository $posts, UserRepository $users)
     {
-        dd($posts->all(), $users->all());
+//        dd($posts->create([
+//            'user_id' => 1,
+//            'slug' => 'test-slug',
+//            'title' => 'Test post',
+//            'excerpt' => 'Ad doloribus eius fugiat id illo incidunt modi',
+//            'content' => '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad doloribus eius fugiat id illo incidunt modi nostrum nulla omnis quibusdam.</p>'
+//        ]));
+
+//        dd(
+//            $posts->all(),
+//            $posts->find(7),
+//            $posts->paginate(5),
+//            $posts->findWhere('slug', 'aspernatur-est-minus-quam-possimus-autem'),
+//            $posts->findWhereFirst('slug', 'aspernatur-est-minus-quam-possimus-autem'),
+//            $users->all()
+//        );
     }
 
     /**
