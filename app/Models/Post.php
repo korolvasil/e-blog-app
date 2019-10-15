@@ -9,6 +9,8 @@ class Post extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'content'];
+
     public function getRouteKeyName()
     {
         return 'slug';
