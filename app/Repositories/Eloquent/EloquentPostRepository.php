@@ -12,9 +12,4 @@ class EloquentPostRepository extends RepositoryAbstract implements PostRepositor
     {
         return Post::class;
     }
-
-    public function all()
-    {
-        return Post::all();
-    }
 }
