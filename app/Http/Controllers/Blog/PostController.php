@@ -14,6 +14,7 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @param PostRepository $posts
+     * @param UserRepository $users
      * @return void
      */
     public function index(PostRepository $posts, UserRepository $users)
