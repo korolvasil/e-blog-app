@@ -2,13 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Contracts\RepositoryInterface;
+use Exception;
+use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Exceptions\NoEntityDefined;
+use App\Repositories\Contracts\RepositoryInterface;
 
 abstract class RepositoryAbstract implements RepositoryInterface
 {
     protected $entity;
 
+    /**
+     * RepositoryAbstract constructor.
+     * @throws NoEntityDefined
+     */
     public function __construct()
     {
         $this->entity = $this->resolveEntity();
@@ -19,11 +25,16 @@ abstract class RepositoryAbstract implements RepositoryInterface
         return $this->entity->all();
     }
 
+    /**
+     * @return Model
+     * @throws NoEntityDefined
+     */
     protected function resolveEntity()
     {
-        if (!method_exists($this, 'entity')) {
+        try {
+            return app()->make($this->entity());
+        } catch (Exception $e) {
             throw new NoEntityDefined();
         }
-        return app()->make($this->entity());
     }
 }
