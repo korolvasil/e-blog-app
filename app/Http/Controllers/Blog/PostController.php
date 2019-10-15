@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Models\Post;
 use App\Repositories\Contracts\PostRepository;
+use App\Repositories\Contracts\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,9 +16,9 @@ class PostController extends Controller
      * @param PostRepository $posts
      * @return void
      */
-    public function index(PostRepository $posts)
+    public function index(PostRepository $posts, UserRepository $users)
     {
-        dd($posts->all());
+        dd($posts->all(), $users->all());
     }
 
     /**
