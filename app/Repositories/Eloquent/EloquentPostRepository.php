@@ -8,6 +8,10 @@ use App\Repositories\RepositoryAbstract;
 
 class EloquentPostRepository extends RepositoryAbstract implements PostRepository
 {
+    public function entity()
+    {
+        return Post::class;
+    }
 
     public function all()
     {

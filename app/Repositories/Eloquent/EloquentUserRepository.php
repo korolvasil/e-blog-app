@@ -8,9 +8,14 @@ use App\Repositories\RepositoryAbstract;
 
 class EloquentUserRepository extends RepositoryAbstract implements UserRepository
 {
+    public function entity()
+    {
+        return User::class;
+    }
 
     public function all()
     {
         return User::all();
     }
+
 }
