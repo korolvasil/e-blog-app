@@ -8,6 +8,6 @@ class IsLive implements CriterionInterface
 {
     public function apply($entity)
     {
-        return $entity->where('is_published', true);
+        return $entity->live();
     }
 }
