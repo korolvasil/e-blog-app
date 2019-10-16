@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog;
 use App\Models\Post;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\UserRepository;
+use App\Repositories\Eloquent\Criteria\LatestFirst;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,6 +36,8 @@ class PostController extends Controller
 //            $posts->findWhereFirst('slug', 'aspernatur-est-minus-quam-possimus-autem'),
 //            $users->all()
 //        );
+        $posts = $posts->withCriteria(new LatestFirst())->paginate();
+        return view('blog.index', compact('posts'));
     }
 
     /**
