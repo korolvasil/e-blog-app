@@ -5,7 +5,7 @@
         <article class="mb-5">
             <header>
                 <h4>{{$item->title}}</h4>
-                <small>by {{$item->user->name}}, {{$item->created_at->diffForHumans()}}</small>
+                <small>by {{$item->user->login}}, {{$item->created_at->diffForHumans()}}</small>
             </header>
             <section>
                 {{$item->excerpt}}
