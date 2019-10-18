@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Models\Post;
+use App\Models\Category;
+use App\Models\BlogPost;
+use App\Models\User;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\UserRepository;
+use App\Repositories\Eloquent\Criteria\ByUser;
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
 use Illuminate\Http\Request;
@@ -21,12 +24,16 @@ class PostController extends Controller
      */
     public function index(PostRepository $posts, UserRepository $users)
     {
-        $posts = $posts->withCriteria([
-            new LatestFirst(),
-            new IsLive()
-        ])->paginate();
+        dd(Category::find(1)->posts()->first()->categories()->first());
+//
 
-        return view('blog.index', compact('posts'));
+//        $posts = $posts->withCriteria([
+//            new LatestFirst(),
+//            new IsLive(),
+//            new ByUser(1)
+//        ])->paginate();
+//
+//        return view('blog.index', compact('posts'));
     }
 
     /**
@@ -53,10 +60,10 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\BlogPost  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(BlogPost $post)
     {
         //
     }
@@ -64,10 +71,10 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\BlogPost  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(BlogPost $post)
     {
         //
     }
@@ -76,10 +83,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\BlogPost  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, BlogPost $post)
     {
         //
     }
@@ -87,10 +94,10 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\BlogPost  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(BlogPost $post)
     {
         //
     }
