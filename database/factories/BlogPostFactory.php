@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Post;
+use App\Models\BlogPost;
 use Faker\Generator as Faker;
 
-$factory->define(Post::class, function (Faker $faker) {
+$factory->define(BlogPost::class, function (Faker $faker) {
 
     $title = $faker->sentence(rand(3, 6), true);
     $text = $faker->realText(rand(1500, 5000));
