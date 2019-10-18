@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -44,7 +44,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(BlogCategory $category)
     {
         //
     }
@@ -55,7 +55,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(BlogCategory $category)
     {
         //
     }
@@ -67,7 +67,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, BlogCategory $category)
     {
         //
     }
@@ -78,7 +78,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(BlogCategory $category)
     {
         //
     }
