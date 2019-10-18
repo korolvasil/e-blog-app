@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Post;
+use App\Models\BlogPost;
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\RepositoryAbstract;
 
@@ -10,6 +10,6 @@ class EloquentPostRepository extends RepositoryAbstract implements PostRepositor
 {
     public function entity()
     {
-        return Post::class;
+        return BlogPost::class;
     }
 }
