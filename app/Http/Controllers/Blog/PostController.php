@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Models\Category;
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use App\Models\User;
 use App\Repositories\Contracts\PostRepository;
@@ -24,7 +24,7 @@ class PostController extends Controller
      */
     public function index(PostRepository $posts, UserRepository $users)
     {
-        dd(Category::find(1)->posts()->first()->categories()->first());
+        dd(BlogCategory::find(1)->posts()->get());
 //
 
 //        $posts = $posts->withCriteria([
