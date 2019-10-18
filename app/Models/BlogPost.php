@@ -6,11 +6,11 @@ use App\Traits\Eloquent\HasLive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class BlogPost extends Model
 {
     use SoftDeletes, HasLive;
 
-    protected $fillable = ['user_id', 'slug', 'title', 'excerpt', 'content'];
+    protected $fillable = ['slug', 'title', 'excerpt', 'content', 'category_id', 'user_id', 'is_published'];
 
     public function getRouteKeyName()
     {
@@ -20,5 +20,10 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(BlogCategory::class);
     }
 }
