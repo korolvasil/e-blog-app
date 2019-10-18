@@ -13,7 +13,7 @@ class BlogCategoriesTableSeeder extends Seeder
     public function run()
     {
         factory(BlogCategory::class, 20)->create()->each(function ($category) {
-            $hasParent = rand(1, 100) <= 45;
+            $hasParent = rand(1, 100) <= 30;
             $parentID = rand(1, 20);
             $parentID = $parentID == $category->id ? null : $parentID;
 
