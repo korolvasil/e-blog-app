@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BlogCategory;
 use Illuminate\Database\Seeder;
 
 class BlogCategoriesTableSeeder extends Seeder
@@ -11,40 +12,16 @@ class BlogCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        // categories count
-        $catCnt = 20;
-
-        // has parent chance
-        $withParentChance = 45;
-
-        $categories =[];
-
-        for ($i = 1; $i <= $catCnt; $i++) {
-            $name = 'Category #' . $i;
-            $categories[] = [
-                'name' => $name,
-                'slug' => Str::slug($name),
-                'is_published' => true
-            ];
-        }
-
-        // insert categories
-        DB::table('blog_categories')->insert($categories);
-
-        // get categories
-        $categories = DB::table('blog_categories')->get();
-
-        // set parent category and update DB
-        foreach ($categories as $key => $category) {
-            $hasParent = rand(1, 100) <= $withParentChance;
-            $parentID = rand(1, $catCnt);
+        factory(BlogCategory::class, 20)->create()->each(function ($category) {
+            $hasParent = rand(1, 100) <= 45;
+            $parentID = rand(1, 20);
             $parentID = $parentID == $category->id ? null : $parentID;
 
-            if ($hasParent && $parentID) {
-                DB::table('blog_categories')->where('id', $category->id)->update([
-                    'parent_id' => $parentID
-                ]);
-            }
-        }
+            $category->name = 'Category #'.$category->id;
+            $category->slug =  Str::slug($category->name);
+            $category->parent_id = $parentID && $hasParent ? $parentID : null;
+
+            $category->save();
+        });
     }
 }
