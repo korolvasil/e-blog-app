@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
+ *  @method Collection get();
  *  @method Collection all();
  *  @method Model|Builder find($id);
  *  @method Collection findWhere($column, $value);
