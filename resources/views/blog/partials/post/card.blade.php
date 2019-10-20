@@ -1,6 +1,6 @@
 <article class="mb-5">
     <header>
-        <h4>{{$post->title}}</h4>
+        <h4>{{$post->title}} #{{$post->id}}</h4>
         <small>by {{$post->user->login}}, {{$post->created_at->diffForHumans()}}</small>
     </header>
     <section>
