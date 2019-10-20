@@ -15,7 +15,7 @@ class Live
      */
     public function handle($request, Closure $next, $model)
     {
-        if ($request->{$model}->isNotLive()) {
+        if ($request->{$model} && $request->{$model}->isNotLive()) {
             return abort(404);
         }
         return $next($request);
