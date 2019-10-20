@@ -23,7 +23,7 @@ class CreateCommentsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
             $table->morphs('commentable'); // commentable_id, commentable_type;
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
