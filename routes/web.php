@@ -1,6 +1,7 @@
 <?php
 
 Route::resource('blog/posts', 'Blog\PostController');
+Route::resource('blog/categories', 'Blog\CategoryController');
 
 Auth::routes(['verify' => true]);
 
