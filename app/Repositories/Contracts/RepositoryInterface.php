@@ -5,6 +5,7 @@ namespace App\Repositories\Contracts;
 interface RepositoryInterface
 {
     public function entity();
+    public function get();
     public function all();
     public function find($id);
     public function findWhere($column, $value);
