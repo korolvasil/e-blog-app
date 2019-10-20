@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateBlogCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('parent_id')->unsigned()->nullable();
@@ -25,8 +25,7 @@ class CreateCategoriesTable extends Migration
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->morphs('categorizable'); // categorizable_id, categorizable_type;
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('parent_id')->references('id')->on('blog_categories')->onDelete('set null');
         });
     }
 
