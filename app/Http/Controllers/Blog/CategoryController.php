@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Models\BlogCategory;
-use App\Repositories\Contracts\BlogCategoryRepository;
-use App\Repositories\Eloquent\Criteria\EagerLoad;
-use App\Repositories\Eloquent\Criteria\IsLive;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
+use App\Models\BlogCategory;
+use App\Http\Controllers\Controller;
+use App\Repositories\Eloquent\Criteria\IsLive;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
+use App\Repositories\Contracts\BlogCategoryRepository;
 
 class CategoryController extends Controller
 {
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         $categories = $categories->withCriteria([
             new IsLive(),
-            new EagerLoad(['user','posts', 'posts.user'])
+            new EagerLoad(['user', 'posts', 'posts.user'])
         ])->get();
 
         return view('blog.category', compact('categories'));
