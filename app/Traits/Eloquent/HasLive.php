@@ -3,7 +3,6 @@
 namespace App\Traits\Eloquent;
 
 use Illuminate\Database\Eloquent\Builder;
-use phpDocumentor\Reflection\Types\Boolean;
 
 trait HasLive
 {
