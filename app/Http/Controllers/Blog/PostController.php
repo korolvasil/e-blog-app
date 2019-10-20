@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers\Blog;
 
-use App\Models\BlogCategory;
 use App\Models\BlogPost;
-use App\Models\User;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\PostRepository;
-use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Eloquent\Criteria\ByUser;
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(['is.live:post']);
+    }
     /**
      * Display a listing of the resource.
      *
      * @param PostRepository $posts
-     * @param UserRepository $users
      * @return void
      */
-    public function index(PostRepository $posts, UserRepository $users)
+    public function index(PostRepository $posts)
     {
-        dd(BlogCategory::find(1)->posts()->get());
-//
+        $posts = $posts->withCriteria([
+            new LatestFirst(),
+            new IsLive(),
+            new EagerLoad(['user'])
+        ])->get();
 
-//        $posts = $posts->withCriteria([
-//            new LatestFirst(),
-//            new IsLive(),
-//            new ByUser(1)
-//        ])->paginate();
-//
-//        return view('blog.index', compact('posts'));
+        return view('blog.index', compact('posts'));
     }
 
     /**
@@ -65,7 +65,7 @@ class PostController extends Controller
      */
     public function show(BlogPost $post)
     {
-        //
+        dd($post);
     }
 
     /**
