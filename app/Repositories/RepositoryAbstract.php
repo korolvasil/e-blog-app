@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,14 +24,21 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
         $this->entity = $this->resolveEntity();
     }
 
+    public function get()
+    {
+        return $this->entity->get();
+    }
+
     public function all()
     {
-        return $this->entity->all();
+        return $this->entity instanceof Builder
+            ? $this->get()
+            : $this->entity->all();
     }
 
     public function find($id)
     {
-        return $this->entity->find($id);
+        return $this->modelOrFail($this->entity->find($id));
     }
 
     public function findWhere($column, $value)
@@ -40,7 +48,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
 
     public function findWhereFirst($column, $value)
     {
-        return $this->entity->where($column, $value)->first();
+        return $this->modelOrFail($this->entity->where($column, $value)->first());
     }
 
     public function paginate($perPage = 10)
@@ -48,7 +56,7 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
         return $this->entity->paginate($perPage);
     }
 
-    public function create($properties)
+    public function create(array $properties)
     {
         return $this->entity->create($properties);
     }
@@ -85,5 +93,15 @@ abstract class RepositoryAbstract implements RepositoryInterface, CriteriaInterf
         } catch (Exception $e) {
             throw new NoEntityDefined();
         }
+    }
+
+    protected function modelOrFail($model)
+    {
+        if (!$model) {
+            // Warning: this is an exception from Eloquent ORM.
+            // Create your own exception if you use a different ORM.
+            throw (new ModelNotFoundException())->setModel(get_class($this->entity->getModel()));
+        }
+        return $model;
     }
 }
