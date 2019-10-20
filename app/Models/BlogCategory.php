@@ -14,6 +14,11 @@ class BlogCategory extends Model
         'name', 'slug', 'description', 'parent_id', 'user_id', 'is_published'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function parent()
     {
         return $this->belongsTo(BlogCategory::class);
