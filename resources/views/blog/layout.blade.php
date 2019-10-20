@@ -1,5 +1,7 @@
 @extends('layouts.public.app')
 
-@yield('content')
+@section('content')
+    @yield('content')
+@endsection
 
 @include('blog.partials.sidebar')
