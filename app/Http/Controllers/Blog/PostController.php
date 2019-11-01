@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Models\BlogPost;
-use App\Repositories\Eloquent\Criteria\EagerLoad;
-use App\Repositories\Eloquent\Criteria\EagerLoadLive;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+
 use App\Repositories\Contracts\PostRepository;
-use App\Repositories\Eloquent\Criteria\ByUser;
+use App\Repositories\Contracts\BlogCategoryRepository;
+
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
+use App\Repositories\Eloquent\Criteria\EagerLoad;
+use App\Repositories\Eloquent\Criteria\EagerLoadLive;
 
 class PostController extends Controller
 {
@@ -19,9 +21,10 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      * @param PostRepository $posts
+     * @param BlogCategoryRepository $categories
      * @return void
      */
-    public function index(PostRepository $posts)
+    public function index(PostRepository $posts, BlogCategoryRepository $categories)
     {
         $posts = $posts->withCriteria([
             new IsLive(),
@@ -30,7 +33,20 @@ class PostController extends Controller
             new EagerLoadLive('category', 'category.parent')
         ])->paginate();
 
-        return view('blog.index', compact('posts'));
+        /* SideBar Category Module's categories data with posts count */
+        $categories = $categories->withCriteria([
+            new IsLive(),
+            new WithCount(['posts' => function ($q) {
+                return $q->live();
+            }])
+        ])->get()->where('posts_count', '<>', 0);
+
+        /* We should increase each category's posts_count with theirs children's posts_count */
+        foreach ($categories as $category) {
+            $category->posts_count += $categories->where('parent_id', $category->id)->pluck('posts_count')->sum();
+        }
+
+        return view('blog.index', compact('posts', 'categories'));
     }
 
     /**
