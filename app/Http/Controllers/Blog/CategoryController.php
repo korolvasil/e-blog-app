@@ -27,15 +27,4 @@ class CategoryController extends Controller
 
         return view('blog.category', compact('categories'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return Response
-     */
-    public function show(BlogCategory $category)
-    {
-        dd($category);
-    }
 }
