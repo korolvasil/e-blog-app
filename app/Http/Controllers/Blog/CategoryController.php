@@ -12,11 +12,6 @@ use App\Repositories\Contracts\BlogCategoryRepository;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['is.live:category']);
-    }
-    
     /**
      * Display a listing of the resource.
      *
