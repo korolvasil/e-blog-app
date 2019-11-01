@@ -2,6 +2,13 @@
     <header>
         <h4>{{$post->title}} #{{$post->id}}</h4>
         <small>by {{$post->user->login}}, {{$post->created_at->diffForHumans()}}</small>
+        @if($category = $post->category)
+            <small>in <a href="{{ route('blog.posts.by.category', $category) }}">{{$category->name}}</a>
+                @if($category->parent)
+                    , <a href="{{ route('blog.posts.by.category', $category->parent) }}">{{$category->parent->name}}</a>
+                @endif
+            </small>
+        @endif
     </header>
     <section>
         {{$post->excerpt}}
