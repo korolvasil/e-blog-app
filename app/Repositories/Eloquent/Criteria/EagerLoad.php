@@ -8,9 +8,9 @@ class EagerLoad implements CriterionInterface
 {
     protected $relations;
 
-    public function __construct(array $relations)
+    public function __construct($relations)
     {
-        $this->relations = $relations;
+        $this->relations = is_string($relations) ? func_get_args() : $relations;
     }
 
     public function apply($entity)
