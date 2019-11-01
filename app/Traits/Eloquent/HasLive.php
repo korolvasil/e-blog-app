@@ -13,6 +13,11 @@ trait HasLive
         return $builder->where(self::$liveColumn, true);
     }
 
+    public function scopeNotLive(Builder $builder)
+    {
+        return $builder->where(self::$liveColumn, false);
+    }
+
     public function isLive()
     {
         return  !!$this->{self::$liveColumn};
