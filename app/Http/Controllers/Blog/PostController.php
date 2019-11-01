@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Models\BlogPost;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -64,12 +65,19 @@ class PostController extends Controller
     /* SideBar Category Module's categories data with posts count */
     protected function sidebarCategories(BlogCategoryRepository $categories)
     {
-        $categories = $categories->withCriteria([
+        /* Using repository */
+        /*$categories = $categories->withCriteria([
             new IsLive(),
             new WithCount(['posts' => function ($q) {
                 return $q->live();
             }])
-        ])->get()->where('posts_count', '<>', 0);
+        ])->get()->where('posts_count', '<>', 0);*/
+
+        /* Using Eloquent Builder */
+        $categories = BlogCategory::withCount(['posts' => function ($q) { return $q->live(); }])
+            ->live()
+            ->whereHas('posts', function ($q) { return $q->live();})
+            ->get();
 
         /* We should increase each category's posts_count with theirs children's posts_count */
         foreach ($categories as $category) {
