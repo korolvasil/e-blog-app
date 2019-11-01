@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Blog;
 
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Models\BlogCategory;
 use App\Http\Controllers\Controller;
+
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\EagerLoad;
+use App\Repositories\Eloquent\Criteria\WithCount;
+
 use App\Repositories\Contracts\BlogCategoryRepository;
 
 class CategoryController extends Controller
@@ -26,5 +29,38 @@ class CategoryController extends Controller
         ])->get();
 
         return view('blog.category', compact('categories'));
+    }
+
+    /**
+     * Display the list of published posts which belongs to specific category with
+     * published posts, that belongs to the children published categories.
+     *
+     * @param BlogCategory $category
+     * @param BlogCategoryRepository $categories
+     * @return void
+     */
+    public function posts(BlogCategory $category, BlogCategoryRepository $categories)
+    {
+        $categories = $this->sidebarCategories($categories);
+
+        return view('blog.index', compact('posts', 'categories'));
+    }
+
+    /* SideBar Category Module's categories data with posts count */
+    protected function sidebarCategories(BlogCategoryRepository $categories)
+    {
+        $categories = $categories->withCriteria([
+            new IsLive(),
+            new WithCount(['posts' => function ($q) {
+                return $q->live();
+            }])
+        ])->get()->where('posts_count', '<>', 0);
+
+        /* We should increase each category's posts_count with theirs children's posts_count */
+        foreach ($categories as $category) {
+            $category->posts_count += $categories->where('parent_id', $category->id)->pluck('posts_count')->sum();
+        }
+
+        return $categories;
     }
 }
