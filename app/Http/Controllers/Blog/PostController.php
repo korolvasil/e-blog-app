@@ -11,6 +11,7 @@ use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\BlogCategoryRepository;
 
 use App\Repositories\Eloquent\Criteria\IsLive;
+use App\Repositories\Eloquent\Criteria\WithCount;
 use App\Repositories\Eloquent\Criteria\LatestFirst;
 use App\Repositories\Eloquent\Criteria\EagerLoad;
 use App\Repositories\Eloquent\Criteria\EagerLoadLive;
