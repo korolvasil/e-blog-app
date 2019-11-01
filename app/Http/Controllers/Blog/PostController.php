@@ -6,6 +6,7 @@ use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 use App\Repositories\Contracts\PostRepository;
 use App\Repositories\Contracts\BlogCategoryRepository;
@@ -27,12 +28,22 @@ class PostController extends Controller
      */
     public function index(PostRepository $posts, BlogCategoryRepository $categories)
     {
-        $posts = $posts->withCriteria([
+        /*$posts = $posts->withCriteria([
             new IsLive(),
             new LatestFirst(),
             new EagerLoad('user'),
             new EagerLoadLive('category', 'category.parent')
-        ])->paginate();
+        ])->paginate();*/
+
+        $posts = BlogPost::with('user', 'category', 'category.parent')
+            ->live()->latest()
+            ->whereDoesntHave('category', function (Builder $q) {
+                return $q->notLive();
+            })
+            ->whereDoesntHave('category.parent', function (Builder $q) {
+                return $q->notLive();
+            })
+            ->paginate();
 
         $categories = $this->sidebarCategories($categories);
 
