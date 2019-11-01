@@ -7,7 +7,7 @@
         {{$post->excerpt}}
     </section>
     <footer class="mt-2">
-        <a class="btn btn-primary btn-sm" href="">
+        <a class="btn btn-primary btn-sm" href="{{ route('blog.posts.show', $post) }}">
             read more
         </a>
     </footer>
