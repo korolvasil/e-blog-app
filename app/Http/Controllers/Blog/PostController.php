@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Models\BlogPost;
 use App\Repositories\Eloquent\Criteria\EagerLoad;
+use App\Repositories\Eloquent\Criteria\EagerLoadLive;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -23,10 +24,11 @@ class PostController extends Controller
     public function index(PostRepository $posts)
     {
         $posts = $posts->withCriteria([
-            new LatestFirst(),
             new IsLive(),
-            new EagerLoad(['user'])
-        ])->get();
+            new LatestFirst(),
+            new EagerLoad('user'),
+            new EagerLoadLive('category', 'category.parent')
+        ])->paginate();
 
         return view('blog.index', compact('posts'));
     }
