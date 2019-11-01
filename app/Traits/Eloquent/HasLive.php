@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait HasLive
 {
+    public static $liveColumn = 'is_published';
+
     public function scopeLive(Builder $builder)
     {
-        return $builder->where('is_published', true);
+        return $builder->where(self::$liveColumn, true);
     }
 
     public function isLive()
     {
-        return  !!$this->is_published;
+        return  !!$this->{self::$liveColumn};
     }
 
     public function isNotLive()
