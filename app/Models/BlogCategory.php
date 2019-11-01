@@ -26,7 +26,7 @@ class BlogCategory extends Model
 
     public function posts()
     {
-        return $this->hasMany(BlogPost::class, 'category_id')->live();
+        return $this->hasMany(BlogPost::class, 'category_id');
     }
 
     public function user()
