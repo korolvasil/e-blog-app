@@ -18,7 +18,7 @@ use App\Repositories\Eloquent\Criteria\EagerLoadLive;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the published posts with categories, which is live.
      *
      * @param PostRepository $posts
      * @param BlogCategoryRepository $categories
@@ -33,18 +33,7 @@ class PostController extends Controller
             new EagerLoadLive('category', 'category.parent')
         ])->paginate();
 
-        /* SideBar Category Module's categories data with posts count */
-        $categories = $categories->withCriteria([
-            new IsLive(),
-            new WithCount(['posts' => function ($q) {
-                return $q->live();
-            }])
-        ])->get()->where('posts_count', '<>', 0);
-
-        /* We should increase each category's posts_count with theirs children's posts_count */
-        foreach ($categories as $category) {
-            $category->posts_count += $categories->where('parent_id', $category->id)->pluck('posts_count')->sum();
-        }
+        $categories = $this->sidebarCategories($categories);
 
         return view('blog.index', compact('posts', 'categories'));
     }
@@ -58,5 +47,23 @@ class PostController extends Controller
     public function show(BlogPost $post)
     {
         dd($post);
+    }
+
+    /* SideBar Category Module's categories data with posts count */
+    protected function sidebarCategories(BlogCategoryRepository $categories)
+    {
+        $categories = $categories->withCriteria([
+            new IsLive(),
+            new WithCount(['posts' => function ($q) {
+                return $q->live();
+            }])
+        ])->get()->where('posts_count', '<>', 0);
+
+        /* We should increase each category's posts_count with theirs children's posts_count */
+        foreach ($categories as $category) {
+            $category->posts_count += $categories->where('parent_id', $category->id)->pluck('posts_count')->sum();
+        }
+
+        return $categories;
     }
 }
