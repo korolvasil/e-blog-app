@@ -18,6 +18,20 @@ trait HasLive
         return $builder->where(self::$liveColumn, false);
     }
 
+    public function loadLive($relations)
+    {
+        return $this->load(
+            self::relationsLiveQuery(is_string($relations) ? func_get_args() : $relations)
+        );
+    }
+
+    public static function withLive($relations)
+    {
+        return static::query()->with(
+            self::relationsLiveQuery(is_string($relations) ? func_get_args() : $relations)
+        );
+    }
+
     public function isLive()
     {
         return  !!$this->{self::$liveColumn};
@@ -26,5 +40,16 @@ trait HasLive
     public function isNotLive()
     {
         return !$this->isLive();
+    }
+
+    protected static function relationsLiveQuery(array $relations)
+    {
+        $relationsLiveQueries = [];
+        foreach ($relations as $rel) {
+            $relationsLiveQueries[$rel] = function ($q) {
+                $q->live();
+            };
+        }
+        return $relationsLiveQueries;
     }
 }
