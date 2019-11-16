@@ -3,7 +3,6 @@
 Auth::routes(['verify' => true]);
 
 Route::namespace('Blog')->prefix('blog')->name('blog.')->group(function () {
-
     Route::get('/', 'PostController@index')
         ->name('posts.all');
 
