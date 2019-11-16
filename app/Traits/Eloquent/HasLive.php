@@ -32,6 +32,13 @@ trait HasLive
         );
     }
 
+    public static function withCountLive($relations)
+    {
+        return static::query()->withCount(
+            self::relationsLiveQuery(is_string($relations) ? func_get_args() : $relations)
+        );
+    }
+
     public function isLive()
     {
         return  !!$this->{self::$liveColumn};
@@ -45,10 +52,17 @@ trait HasLive
     protected static function relationsLiveQuery(array $relations)
     {
         $relationsLiveQueries = [];
-        foreach ($relations as $rel) {
-            $relationsLiveQueries[$rel] = function ($q) {
-                $q->live();
-            };
+
+        foreach ($relations as $key => $rel) {
+            if ($rel instanceof \Closure) {
+                $relationsLiveQueries[$key] = function ($q) use ($rel) {
+                    return $rel($q->live());
+                };
+            } else {
+                $relationsLiveQueries[$rel] = function ($q) {
+                    return $q->live();
+                };
+            }
         }
         return $relationsLiveQueries;
     }
