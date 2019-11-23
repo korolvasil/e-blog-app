@@ -3,102 +3,39 @@
 namespace App\Http\Controllers\Blog;
 
 use App\Models\BlogPost;
-use App\Repositories\Eloquent\Criteria\EagerLoad;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use App\Repositories\Contracts\PostRepository;
-use App\Repositories\Eloquent\Criteria\ByUser;
-use App\Repositories\Eloquent\Criteria\IsLive;
-use App\Repositories\Eloquent\Criteria\LatestFirst;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware(['is.live:post']);
-    }
     /**
-     * Display a listing of the resource.
+     * Display a listing of the published posts with categories, which is live.
      *
-     * @param PostRepository $posts
      * @return void
      */
-    public function index(PostRepository $posts)
+    public function index()
     {
-        $posts = $posts->withCriteria([
-            new LatestFirst(),
-            new IsLive(),
-            new EagerLoad(['user'])
-        ])->get();
+        $posts = BlogPost::withLive('category', 'category.ancestors')
+            ->with('user')
+            ->whereDoesntHave('category', function (Builder $q) {
+                return $q->notLive();
+            })
+            ->whereDoesntHave('category.ancestors', function (Builder $q) {
+                return $q->notLive();
+            })
+            ->live()->latest()
+            ->paginate();
 
         return view('blog.index', compact('posts'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param  \App\Models\BlogPost  $post
-     * @return \Illuminate\Http\Response
+     * @param  BlogPost  $post
      */
     public function show(BlogPost $post)
     {
         dd($post);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\BlogPost  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(BlogPost $post)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\BlogPost  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, BlogPost $post)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\BlogPost  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(BlogPost $post)
-    {
-        //
     }
 }

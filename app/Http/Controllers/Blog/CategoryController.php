@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers\Blog;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\BlogPost;
 use App\Models\BlogCategory;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
+
+use App\Repositories\Contracts\BlogCategoryRepository;
+
 use App\Repositories\Eloquent\Criteria\IsLive;
 use App\Repositories\Eloquent\Criteria\EagerLoad;
-use App\Repositories\Contracts\BlogCategoryRepository;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['is.live:category']);
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -34,68 +31,21 @@ class CategoryController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the list of published posts which belongs to specific category with
+     * published posts, that belongs to the children published categories.
      *
-     * @return Response
+     * @param BlogCategory $category
+     * @return void
      */
-    public function create()
+    public function posts(BlogCategory $category)
     {
-        //
-    }
+        $posts = BlogPost::withLive('category', 'category.ancestors')
+            ->with('user')->live()->latest()
+            ->whereHas('category', function ($q) use ($category) {
+                return $q->live()->whereIn('id', $category->descendants->pluck('id')->merge($category->id));
+            })
+            ->paginate();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return Response
-     */
-    public function show(BlogCategory $category)
-    {
-        dd($category);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return Response
-     */
-    public function edit(BlogCategory $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  \App\Models\Category  $category
-     * @return Response
-     */
-    public function update(Request $request, BlogCategory $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return Response
-     */
-    public function destroy(BlogCategory $category)
-    {
-        //
+        return view('blog.category', compact('posts'));
     }
 }

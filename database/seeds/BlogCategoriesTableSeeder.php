@@ -17,9 +17,12 @@ class BlogCategoriesTableSeeder extends Seeder
             $parentID = rand(1, 20);
             $parentID = $parentID == $category->id ? null : $parentID;
 
-            $category->name = 'Category #'.$category->id;
-            $category->slug =  Str::slug($category->name);
-            $category->parent_id = $parentID && $hasParent ? $parentID : null;
+            if ($parentID && $hasParent) {
+                $category->parent_id = $parentID;
+            }
+
+            $prefix = $category->parent ? $category->parent->name . ' ' : '';
+            $category->slug =  Str::slug($prefix . $category->name);
 
             $category->save();
         });
