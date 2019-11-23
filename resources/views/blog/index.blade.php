@@ -1,7 +1,6 @@
 @extends('blog.layout')
 
 @section('content')
-    @foreach($posts as $post)
-        @include('blog.partials.post.card')
-    @endforeach
+    @each('blog.partials.post.card', $posts, 'post')
+    <div class="container">{{ $posts->links() }}</div>
 @endsection

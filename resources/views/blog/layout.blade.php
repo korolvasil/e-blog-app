@@ -4,4 +4,4 @@
     @yield('content')
 @endsection
 
-@include('blog.partials.sidebar')
+@include('blog.partials.sidebar.index')
