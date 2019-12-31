@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Models;
-
-//use App\Traits\Eloquent\HasPublished;
-use App\Traits\Eloquent\DeletePublishedHasLive\HasLive;
-use App\Traits\Eloquent\PublishedLive\PublishedHasLive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Eloquent\PublishedLive\PublishedHasLive;
 
 class Tag extends Model
 {
