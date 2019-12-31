@@ -24,7 +24,16 @@ class CreateTagsTable extends Migration
             $table->timestamp('published_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
-            $table->morphs('taggable'); // taggable_id, taggable_type;
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+        });
+
+        Schema::create('taggables', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->bigInteger('tag_id')->unsigned();
+            $table->bigInteger('taggable_id')->unsigned();
+            $table->string('taggable_type');
+
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 
