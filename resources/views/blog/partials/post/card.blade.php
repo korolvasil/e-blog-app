@@ -15,8 +15,18 @@
     <section>
         {{$post->excerpt}}
     </section>
+    @if($post->tags->count())
+        <section>
+            <small>Tagged in:
+                @foreach($post->tags as $tag)
+                    <a href="{{ route('blog.posts.by.tag', $tag) }}">{{$tag->name}}</a>
+                @endforeach
+            </small>
+        </section>
+    @endif
     <footer class="mt-2">
-        <a class="btn btn-primary btn-sm" href="{{ route('blog.posts.show', $post) }}">
+
+        <a class="btn btn-primary btn-sm" href="{{ route('blog.post.show', $post) }}">
             read more
         </a>
     </footer>
