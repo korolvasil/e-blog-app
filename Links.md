@@ -1,7 +1,10 @@
 ##### Dynamic breadcrumbs in Laravel
 ##### Laravel Tagging package development
+
 ##### Reusable Laravel comments
 ##### Recursive comment nesting in Laravel
+##### Super Fast Data Nesting
+
 ##### Roles and permissions in Laravel
 ##### Automatically separate user file uploads in Laravel
 ##### Automatically generating events and listeners in Laravel
@@ -63,7 +66,6 @@
 ##### Drag and drop sorting with Laravel
 
 ##### Snippet Profiling JSON responses in Laravel
-##### Super Fast Data Nesting
 ##### The optional() helper callback
 
 ##### Vue Style Guide
