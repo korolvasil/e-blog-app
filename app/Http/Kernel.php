@@ -70,6 +70,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
+        'is.published' => \App\Http\Middleware\Is\Published::class,
         'is.live' => \App\Http\Middleware\Is\Live::class,
 
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
