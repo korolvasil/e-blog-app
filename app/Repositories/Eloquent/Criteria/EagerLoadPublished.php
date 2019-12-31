@@ -2,21 +2,21 @@
 
 namespace App\Repositories\Eloquent\Criteria;
 
-class EagerLoadLive extends EagerLoad
+class EagerLoadPublished extends EagerLoad
 {
 
     public function __construct($relations)
     {
         $relations = is_string($relations) ? func_get_args() : $relations;
 
-        $relationsLiveQueries = [];
+        $relationsPublishedQueries = [];
 
         foreach ($relations as $rel) {
-            $relationsLiveQueries[$rel] = function ($q) {
-                $q->live();
+            $relationsPublishedQueries[$rel] = function ($q) {
+                $q->published();
             };
         }
 
-        parent::__construct($relationsLiveQueries);
+        parent::__construct($relationsPublishedQueries);
     }
 }
