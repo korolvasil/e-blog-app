@@ -5,7 +5,7 @@ namespace App\Models;
 use Kalnoy\Nestedset\NodeTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Eloquent\PublishedLive\PublishedHasLiveCategory;
+use App\Traits\Eloquent\PublishedHasLive\PublishedHasLiveCategory;
 
 class BlogCategory extends Model
 {

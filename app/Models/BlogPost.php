@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Eloquent\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Eloquent\PublishedLive\PublishedHasLivePost;
+use App\Traits\Eloquent\PublishedHasLive\PublishedHasLivePost;
 
 class BlogPost extends Model
 {

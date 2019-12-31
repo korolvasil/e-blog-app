@@ -3,11 +3,11 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Traits\Eloquent\PublishedLive\PublishedHasLive;
+use App\Traits\Eloquent\PublishedHasLive\PublishedHasLiveTrait;
 
 class Tag extends Model
 {
-    use SoftDeletes, PublishedHasLive;
+    use SoftDeletes, PublishedHasLiveTrait;
 
     public function getRouteKeyName()
     {
