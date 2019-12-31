@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use Kalnoy\Nestedset\NodeTrait;
-use App\Traits\Eloquent\HasLive;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Eloquent\PublishedLive\PublishedHasLiveCategory;
 
 class BlogCategory extends Model
 {
-    use SoftDeletes, HasLive, NodeTrait;
+    use SoftDeletes, NodeTrait, PublishedHasLiveCategory;
 
     protected $fillable = [
         'name', 'slug', 'description', 'parent_id', 'user_id', 'is_published'

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\Traits\Eloquent\HasLive;
+use App\Traits\Eloquent\Taggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Traits\Eloquent\PublishedLive\PublishedHasLivePost;
 
 class BlogPost extends Model
 {
-    use SoftDeletes, HasLive;
+    use SoftDeletes, PublishedHasLivePost, Taggable;
 
     protected $fillable = ['slug', 'title', 'excerpt', 'content', 'category_id', 'user_id', 'is_published'];
 
