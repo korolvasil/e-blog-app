@@ -4,10 +4,10 @@ namespace App\Repositories\Eloquent\Criteria;
 
 use App\Repositories\Criteria\CriterionInterface;
 
-class IsLive implements CriterionInterface
+class Published implements CriterionInterface
 {
     public function apply($entity)
     {
-        return $entity->live();
+        return $entity->published();
     }
 }
